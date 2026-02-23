@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gamification Bridge | B2B Marka & Oyun Ajansı</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+
+        /* 12-Column Flexible Box System */
+        .grid-12 {
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: -15px;
+            margin-left: -15px;
+        }
+
+        .container-custom {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        [class*="col-"] {
+            padding: 0 15px;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        /* Desktop Column Widths */
+        .col-1  { width: 8.33%; }
+        .col-2  { width: 16.66%; }
+        .col-3  { width: 25%; }
+        .col-4  { width: 33.33%; }
+        .col-5  { width: 41.66%; }
+        .col-6  { width: 50%; }
+        .col-7  { width: 58.33%; }
+        .col-8  { width: 66.66%; }
+        .col-9  { width: 75%; }
+        .col-10 { width: 83.33%; }
+        .col-11 { width: 91.66%; }
+        .col-12 { width: 100%; }
+
+        /* Mobile Responsive (Stack Columns) */
+        @media (max-width: 768px) {
+            [class*="col-"] {
+                width: 100% !important;
+                margin-bottom: 20px;
+            }
+        }
+
+        /* UI Elements */
+        .nav-link { font-weight: 600; font-size: 0.9rem; position: relative; }
+        .nav-link::after {
+            content: ''; position: absolute; bottom: -5px; left: 0;
+            width: 0; height: 2px; background: #2563eb; transition: 0.3s;
+        }
+        .nav-link:hover::after { width: 100%; }
+
+        .btn-primary {
+            background: #000; color: #fff; padding: 14px 32px;
+            border-radius: 6px; font-weight: 800; display: inline-block;
+            transition: all 0.3s; text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .btn-primary:hover { background: #2563eb; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2); }
+
+        .glass-card {
+            background: #fff; border: 1px solid #e5e7eb; padding: 40px;
+            border-radius: 12px; height: 100%; transition: 0.3s;
+        }
+        .glass-card:hover { border-color: #2563eb; box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+
+        .image-container { position: relative; overflow: hidden; border-radius: 12px; }
+        .image-container img { transition: 0.5s; width: 100%; display: block; }
+        .image-container:hover img { transform: scale(1.05); }
+    </style>
+</head>
+<body class="bg-white text-slate-900 overflow-x-hidden">
+
+    <!-- Header -->
+    <header class="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b border-gray-100 py-5">
+        <div class="container-custom">
+            <div class="grid-12 items-center">
+                <div class="col-3">
+                    <a href="#" class="inline-block">
+                        <!-- logo.png dosyasını ana dizine koyun -->
+                        <img src="logo.png" alt="Logo" onerror="this.src='https://via.placeholder.com/150x40?text=LOGO'" class="h-8">
+                    </a>
+                </div>
+                <div class="col-9">
+                    <nav class="flex justify-end items-center space-x-10">
+                        <a href="#about" class="nav-link">HAKKIMIZDA</a>
+                        <a href="#partners" class="nav-link text-gray-500 hover:text-blue-600">PARTNERLER</a>
+                        <a href="#references" class="nav-link text-gray-500 hover:text-blue-600">REFERANSLAR</a>
+                        <a href="#contact" class="btn-primary py-3 px-6 text-sm">PROJE BAŞLAT</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="pt-40 pb-20">
+        <div class="container-custom">
+            <div class="grid-12 items-center">
+                <div class="col-6">
+                    <span class="text-blue-600 font-extrabold tracking-widest text-xs uppercase mb-4 block">B2B Gamification Agency</span>
+                    <h1 class="text-6xl font-extrabold leading-tight mb-6">Markanızı Oyun Evrenine <span class="text-blue-600">Bağlıyoruz.</span></h1>
+                    <p class="text-gray-500 text-xl mb-10 leading-relaxed">Adidas gibi global markaları, Peak Games gibi dev oyun stüdyolarıyla stratejik iş birliklerinde buluşturuyoruz. Sadece reklam değil, bir oyun parçası olun.</p>
+                    <a href="#contact" class="btn-primary">İş Birliği Yapalım</a>
+                </div>
+                <div class="col-6">
+                    <div class="image-container">
+                        <!-- hero.png dosyasını ana dizine koyun -->
+                        <img src="hero.png" alt="Hero Image" onerror="this.src='https://via.placeholder.com/600x600?text=Gamification+Concept'" class="shadow-2xl">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About & Vision -->
+    <section id="about" class="py-24 bg-slate-50">
+        <div class="container-custom">
+            <div class="grid-12 mb-20 items-center">
+                <div class="col-5">
+                    <div class="image-container">
+                        <!-- hakkimizda.jpg dosyasını ana dizine koyun -->
+                        <img src="hakkimizda.jpg" alt="About" onerror="this.src='https://via.placeholder.com/500x700?text=Hakkımızda'" class="shadow-lg">
+                    </div>
+                </div>
+                <div class="col-7">
+                    <div class="pl-10">
+                        <h2 class="text-4xl font-extrabold mb-6 italic">Geleneksel PR'ı Oyunlaştırma ile Değiştiriyoruz.</h2>
+                        <p class="text-gray-600 text-lg mb-8 leading-relaxed">Biz bir köprüyüz. Markaların etkileşim ihtiyaçlarını, oyun dünyasının mekanikleriyle birleştirerek kalıcı kullanıcı sadakati yaratıyoruz. Danışmanlığımız, markanızın oyun içi entegrasyonundan iletişim stratejisine kadar her aşamayı kapsar.</p>
+                        
+                        <div class="grid-12">
+                            <div class="col-6">
+                                <h4 class="font-bold text-blue-600 mb-2">VİZYONUMUZ</h4>
+                                <p class="text-sm text-gray-500 italic">"Reklamın olmadığı, sadece oyunun ve deneyimin olduğu bir dijital ekosistem yaratmak."</p>
+                            </div>
+                            <div class="col-6 text-right">
+                                <h4 class="font-bold text-blue-600 mb-2">MİSYONUMUZ</h4>
+                                <p class="text-sm text-gray-500 italic">"Markaları ve oyuncuları en doğal, en eğlenceli ve en karlı noktada buluşturmak."</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Studio Categories -->
+    <section id="partners" class="py-24">
+        <div class="container-custom">
+            <div class="grid-12 mb-12">
+                <div class="col-12">
+                    <h2 class="text-3xl font-extrabold uppercase border-b-2 border-black inline-block pb-2">Oyun Partneri Kategorileri</h2>
+                </div>
+            </div>
+            <div class="grid-12">
+                <!-- Kategoriler: Resimleri kategori-*.jpg olarak ana dizine atın -->
+                <div class="col-3">
+                    <div class="glass-card text-center group">
+                        <div class="mb-6 overflow-hidden rounded-md">
+                            <img src="kategori-hypercasual.jpg" alt="HC" onerror="this.src='https://via.placeholder.com/300x200?text=Hypercasual'" class="group-hover:scale-110 transition">
+                        </div>
+                        <h5 class="font-bold text-lg mb-2">Hyper-Casual</h5>
+                        <p class="text-xs text-gray-400">Hızlı etkileşim, kitlesel erişim.</p>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="glass-card text-center group">
+                        <div class="mb-6 overflow-hidden rounded-md">
+                            <img src="kategori-midcore.jpg" alt="Mid" onerror="this.src='https://via.placeholder.com/300x200?text=Mid-Core'" class="group-hover:scale-110 transition">
+                        </div>
+                        <h5 class="font-bold text-lg mb-2">Mid-Core & RPG</h5>
+                        <p class="text-xs text-gray-400">Derin deneyim, sadık kitle.</p>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="glass-card text-center group">
+                        <div class="mb-6 overflow-hidden rounded-md">
+                            <img src="kategori-puzzle.jpg" alt="Pz" onerror="this.src='https://via.placeholder.com/300x200?text=Puzzle'" class="group-hover:scale-110 transition">
+                        </div>
+                        <h5 class="font-bold text-lg mb-2">Puzzle / Casual</h5>
+                        <p class="text-xs text-gray-400">Zeka ve zaman odaklı marka entegrasyonu.</p>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="glass-card text-center group">
+                        <div class="mb-6 overflow-hidden rounded-md">
+                            <img src="kategori-metaverse.jpg" alt="Meta" onerror="this.src='https://via.placeholder.com/300x200?text=Metaverse'" class="group-hover:scale-110 transition">
+                        </div>
+                        <h5 class="font-bold text-lg mb-2">Metaverse</h5>
+                        <p class="text-xs text-gray-400">Geleceğin dünyasında sanal varlıklar.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- References -->
+    <section id="references" class="py-16 border-y border-gray-100 bg-white">
+        <div class="container-custom">
+            <div class="grid-12 opacity-30 items-center justify-between grayscale hover:grayscale-0 hover:opacity-100 transition duration-500">
+                <div class="col-2"><img src="referans1.png" alt="R1" onerror="this.src='https://via.placeholder.com/120x60?text=Marka1'" class="mx-auto h-6 object-contain"></div>
+                <div class="col-2"><img src="referans2.png" alt="R2" onerror="this.src='https://via.placeholder.com/120x60?text=Marka2'" class="mx-auto h-6 object-contain"></div>
+                <div class="col-2"><img src="referans3.png" alt="R3" onerror="this.src='https://via.placeholder.com/120x60?text=Marka3'" class="mx-auto h-6 object-contain"></div>
+                <div class="col-2"><img src="referans4.png" alt="R4" onerror="this.src='https://via.placeholder.com/120x60?text=Marka4'" class="mx-auto h-6 object-contain"></div>
+                <div class="col-2"><img src="referans5.png" alt="R5" onerror="this.src='https://via.placeholder.com/120x60?text=Marka5'" class="mx-auto h-6 object-contain"></div>
+                <div class="col-2"><img src="referans6.png" alt="R6" onerror="this.src='https://via.placeholder.com/120x60?text=Marka6'" class="mx-auto h-6 object-contain"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-24 bg-black text-white">
+        <div class="container-custom">
+            <div class="grid-12">
+                <div class="col-6">
+                    <h2 class="text-5xl font-extrabold mb-8 uppercase tracking-tighter">Bir Sonraki Level'a<br>Birlikte Geçelim.</h2>
+                    <p class="text-gray-400 mb-10 text-lg">Hangi oyun evreninde yer almak istiyorsunuz? Markanızın hedeflerini anlatın, partner ağımızdan en doğru eşleşmeyi yapalım.</p>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3"><div class="w-10 h-[1px] bg-blue-600"></div> hello@gamificationbridge.com</div>
+                        <div class="flex items-center gap-3"><div class="w-10 h-[1px] bg-blue-600"></div> LinkedIn /gamificationbridge</div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <form action="#" class="space-y-4">
+                        <div class="grid-12">
+                            <div class="col-12"><input type="text" placeholder="Ad Soyad / Şirket" class="w-full bg-zinc-900 border border-zinc-800 p-4 rounded outline-none focus:border-blue-600 transition"></div>
+                            <div class="col-12 mt-4"><input type="email" placeholder="Kurumsal E-posta" class="w-full bg-zinc-900 border border-zinc-800 p-4 rounded outline-none focus:border-blue-600 transition"></div>
+                            <div class="col-12 mt-4"><textarea placeholder="Beklentileriniz ve Hedef Kitleniz" rows="5" class="w-full bg-zinc-900 border border-zinc-800 p-4 rounded outline-none focus:border-blue-600 transition"></textarea></div>
+                            <div class="col-12 mt-6">
+                                <button type="submit" class="w-full btn-primary bg-blue-600 text-white border-none py-5 rounded-md hover:bg-blue-700">TALEBİ GÖNDER</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-10 bg-black border-t border-zinc-900">
+        <div class="container-custom">
+            <div class="grid-12 text-zinc-600 text-xs items-center uppercase tracking-widest font-bold">
+                <div class="col-6">© 2024 GAMIFICATION BRIDGE AGENCY. ALL RIGHTS RESERVED.</div>
+                <div class="col-6 text-right">PR // GAMING // TECHNOLOGY</div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
