@@ -99,6 +99,35 @@
         /* Theme Toggle Transitions */
         html.dark { background-color: #09090b; color: #fafafa; }
         body { transition: background-color 0.3s, color 0.3s; }
+
+        /* AI Section specific styles */
+        .ai-output-container {
+            min-height: 150px;
+            border: 1px solid #e5e7eb;
+            background: #f9fafb;
+            padding: 2rem;
+            border-radius: 12px;
+            position: relative;
+        }
+        .dark .ai-output-container {
+            background: #111113;
+            border-color: #27272a;
+        }
+        .loader {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #2563eb;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body class="bg-white dark:bg-zinc-950 text-slate-900 dark:text-zinc-100 overflow-x-hidden">
@@ -109,7 +138,6 @@
             <div class="grid-12 items-center">
                 <div class="col-3">
                     <a href="#" class="inline-block">
-                        <!-- Logo boyutu h-8'den h-12'ye çıkarıldı -->
                         <img src="logo.png" alt="Logo" onerror="this.src='https://via.placeholder.com/200x60?text=LOGO'" class="h-12 w-auto dark:brightness-200 transition-all">
                     </a>
                 </div>
@@ -117,6 +145,7 @@
                     <nav class="flex justify-end items-center space-x-8">
                         <a href="#about" class="nav-link">HAKKIMIZDA</a>
                         <a href="#partners" class="nav-link text-gray-500 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400">PARTNERLER</a>
+                        <a href="#ai-lab" class="nav-link text-gray-500 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 font-bold italic">✨ AI LAB</a>
                         <a href="#references" class="nav-link text-gray-500 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400">REFERANSLAR</a>
                         
                         <!-- Theme Toggle Button -->
@@ -139,7 +168,7 @@
                 <div class="col-6">
                     <span class="text-blue-600 dark:text-blue-400 font-extrabold tracking-widest text-xs uppercase mb-4 block">B2B Gamification Agency</span>
                     <h1 class="text-6xl font-extrabold leading-tight mb-6 dark:text-white">Markanızı Oyun Evrenine <span class="text-blue-600 dark:text-blue-400">Bağlıyoruz.</span></h1>
-                    <p class="text-gray-500 dark:text-zinc-400 text-xl mb-10 leading-relaxed">Adidas gibi global markaları, Peak Games gibi dev oyun stüdyolarıyla stratejik iş birliklerinde buluşturuyoruz. Sadece reklam değil, bir oyun parçası olun.</p>
+                    <p class="text-gray-500 dark:text-zinc-400 text-xl mb-10 leading-relaxed">Global markaları öncü oyun stüdyolarıyla stratejik iş birliklerinde buluşturuyoruz. Sadece reklam değil, bir oyun parçası olun.</p>
                     <a href="#contact" class="btn-primary dark:bg-white dark:text-black dark:hover:bg-blue-500 dark:hover:text-white">İş Birliği Yapalım</a>
                 </div>
                 <div class="col-6">
@@ -151,8 +180,48 @@
         </div>
     </section>
 
+    <!-- AI Lab Section - ✨ NEW FEATURE -->
+    <section id="ai-lab" class="py-24 bg-blue-50 dark:bg-zinc-900">
+        <div class="container-custom">
+            <div class="grid-12 items-center">
+                <div class="col-5">
+                    <h2 class="text-4xl font-extrabold mb-6 dark:text-white">✨ AI Strateji Laboratuvarı</h2>
+                    <p class="text-gray-600 dark:text-zinc-400 mb-8">Henüz bir fikriniz yok mu? Yapay zeka destekli motorumuzla markanız için anında bir oyunlaştırma konsepti oluşturun.</p>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-bold mb-2 uppercase tracking-wide">Sektörünüz</label>
+                            <input id="ai-industry" type="text" placeholder="Örn: Hazır Giyim, Bankacılık, Gıda" class="w-full bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 p-4 rounded outline-none focus:border-blue-600 transition dark:text-white">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold mb-2 uppercase tracking-wide">Ana Hedefiniz</label>
+                            <select id="ai-goal" class="w-full bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 p-4 rounded outline-none focus:border-blue-600 transition dark:text-white">
+                                <option value="Kullanıcı Sadakati (Loyalty)">Kullanıcı Sadakati (Loyalty)</option>
+                                <option value="Marka Bilinirliği (Awareness)">Marka Bilinirliği (Awareness)</option>
+                                <option value="Satış Artışı (Conversion)">Satış Artışı (Conversion)</option>
+                                <option value="Sosyal Sorumluluk (Impact)">Sosyal Sorumluluk (Impact)</option>
+                            </select>
+                        </div>
+                        <button id="generate-strategy-btn" class="w-full bg-blue-600 text-white font-bold py-4 rounded hover:bg-blue-700 transition transform hover:scale-[1.02]">STRATEJİ ÜRET ✨</button>
+                    </div>
+                </div>
+                <div class="col-7">
+                    <div class="ai-output-container shadow-inner">
+                        <div id="ai-status" class="hidden mb-4 italic text-blue-600 dark:text-blue-400">
+                            <span class="loader"></span> Gemini strateji tasarlıyor...
+                        </div>
+                        <div id="ai-result" class="text-lg leading-relaxed text-gray-700 dark:text-zinc-300">
+                            Laboratuvar henüz çalıştırılmadı. Sol taraftaki bilgileri doldurarak ilk stratejinizi oluşturun.
+                        </div>
+                    </div>
+                    <p class="mt-4 text-xs text-gray-400 text-center italic">Gemini 2.5 Flash tarafından güçlendirilmiştir.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- About & Vision -->
-    <section id="about" class="py-24 bg-slate-50 dark:bg-zinc-900/50">
+    <section id="about" class="py-24 bg-white dark:bg-zinc-950">
         <div class="container-custom">
             <div class="grid-12 mb-20 items-center">
                 <div class="col-5">
@@ -182,7 +251,7 @@
     </section>
 
     <!-- Studio Categories -->
-    <section id="partners" class="py-24 bg-white dark:bg-zinc-950">
+    <section id="partners" class="py-24 bg-slate-50 dark:bg-zinc-900/50">
         <div class="container-custom">
             <div class="grid-12 mb-12">
                 <div class="col-12 text-center">
@@ -284,13 +353,13 @@
         </div>
     </footer>
 
-    <!-- Dark Mode Toggle Script -->
+    <!-- Scripts -->
     <script>
+        // --- Theme Toggle ---
         const themeToggleBtn = document.getElementById('theme-toggle');
         const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
         const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
 
-        // Check preference on load
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
             themeToggleLightIcon.classList.remove('hidden');
@@ -300,11 +369,8 @@
         }
 
         themeToggleBtn.addEventListener('click', function() {
-            // Toggle icons
             themeToggleDarkIcon.classList.toggle('hidden');
             themeToggleLightIcon.classList.toggle('hidden');
-
-            // Toggle theme
             if (document.documentElement.classList.contains('dark')) {
                 document.documentElement.classList.remove('dark');
                 localStorage.setItem('color-theme', 'light');
@@ -313,7 +379,3 @@
                 localStorage.setItem('color-theme', 'dark');
             }
         });
-    </script>
-
-</body>
-</html>
