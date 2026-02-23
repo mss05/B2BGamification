@@ -4,8 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gamification Bridge | B2B Marka & Oyun Ajansı</title>
-    <!-- Tailwind CSS CDN -->
+    <!-- Tailwind CSS CDN - Dark Mode config included -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     
     <style>
@@ -55,7 +60,7 @@
         }
 
         /* UI Elements */
-        .nav-link { font-weight: 600; font-size: 0.9rem; position: relative; }
+        .nav-link { font-weight: 600; font-size: 0.9rem; position: relative; transition: color 0.3s; }
         .nav-link::after {
             content: ''; position: absolute; bottom: -5px; left: 0;
             width: 0; height: 2px; background: #2563eb; transition: 0.3s;
@@ -71,33 +76,56 @@
 
         .glass-card {
             background: #fff; border: 1px solid #e5e7eb; padding: 40px;
-            border-radius: 12px; height: 100%; transition: 0.3s;
+            border-radius: 12px; height: 100%; transition: all 0.3s;
+        }
+        .dark .glass-card {
+            background: #18181b; border-color: #27272a;
         }
         .glass-card:hover { border-color: #2563eb; box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
 
         .image-container { position: relative; overflow: hidden; border-radius: 12px; }
         .image-container img { transition: 0.5s; width: 100%; display: block; }
         .image-container:hover img { transform: scale(1.05); }
+
+        /* Full page section style for References */
+        .full-page-section {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        /* Theme Toggle Transitions */
+        html.dark { background-color: #09090b; color: #fafafa; }
+        body { transition: background-color 0.3s, color 0.3s; }
     </style>
 </head>
-<body class="bg-white text-slate-900 overflow-x-hidden">
+<body class="bg-white dark:bg-zinc-950 text-slate-900 dark:text-zinc-100 overflow-x-hidden">
 
     <!-- Header -->
-    <header class="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b border-gray-100 py-5">
+    <header class="fixed top-0 w-full bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md z-50 border-b border-gray-100 dark:border-zinc-900 py-4">
         <div class="container-custom">
             <div class="grid-12 items-center">
                 <div class="col-3">
                     <a href="#" class="inline-block">
-                        <!-- logo.png dosyasını ana dizine koyun -->
-                        <img src="logo.png" alt="Logo" onerror="this.src='https://via.placeholder.com/150x40?text=LOGO'" class="h-8">
+                        <!-- Logo boyutu h-8'den h-12'ye çıkarıldı -->
+                        <img src="logo.png" alt="Logo" onerror="this.src='https://via.placeholder.com/200x60?text=LOGO'" class="h-12 w-auto dark:brightness-200 transition-all">
                     </a>
                 </div>
                 <div class="col-9">
-                    <nav class="flex justify-end items-center space-x-10">
+                    <nav class="flex justify-end items-center space-x-8">
                         <a href="#about" class="nav-link">HAKKIMIZDA</a>
-                        <a href="#partners" class="nav-link text-gray-500 hover:text-blue-600">PARTNERLER</a>
-                        <a href="#references" class="nav-link text-gray-500 hover:text-blue-600">REFERANSLAR</a>
-                        <a href="#contact" class="btn-primary py-3 px-6 text-sm">PROJE BAŞLAT</a>
+                        <a href="#partners" class="nav-link text-gray-500 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400">PARTNERLER</a>
+                        <a href="#references" class="nav-link text-gray-500 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400">REFERANSLAR</a>
+                        
+                        <!-- Theme Toggle Button -->
+                        <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors">
+                            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 100 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                        </button>
+
+                        <a href="#contact" class="btn-primary dark:bg-white dark:text-black dark:hover:bg-blue-500 dark:hover:text-white py-3 px-6 text-sm">PROJE BAŞLAT</a>
                     </nav>
                 </div>
             </div>
@@ -109,15 +137,14 @@
         <div class="container-custom">
             <div class="grid-12 items-center">
                 <div class="col-6">
-                    <span class="text-blue-600 font-extrabold tracking-widest text-xs uppercase mb-4 block">B2B Gamification Agency</span>
-                    <h1 class="text-6xl font-extrabold leading-tight mb-6">Markanızı Oyun Evrenine <span class="text-blue-600">Bağlıyoruz.</span></h1>
-                    <p class="text-gray-500 text-xl mb-10 leading-relaxed">Adidas gibi global markaları, Peak Games gibi dev oyun stüdyolarıyla stratejik iş birliklerinde buluşturuyoruz. Sadece reklam değil, bir oyun parçası olun.</p>
-                    <a href="#contact" class="btn-primary">İş Birliği Yapalım</a>
+                    <span class="text-blue-600 dark:text-blue-400 font-extrabold tracking-widest text-xs uppercase mb-4 block">B2B Gamification Agency</span>
+                    <h1 class="text-6xl font-extrabold leading-tight mb-6 dark:text-white">Markanızı Oyun Evrenine <span class="text-blue-600 dark:text-blue-400">Bağlıyoruz.</span></h1>
+                    <p class="text-gray-500 dark:text-zinc-400 text-xl mb-10 leading-relaxed">Adidas gibi global markaları, Peak Games gibi dev oyun stüdyolarıyla stratejik iş birliklerinde buluşturuyoruz. Sadece reklam değil, bir oyun parçası olun.</p>
+                    <a href="#contact" class="btn-primary dark:bg-white dark:text-black dark:hover:bg-blue-500 dark:hover:text-white">İş Birliği Yapalım</a>
                 </div>
                 <div class="col-6">
                     <div class="image-container">
-                        <!-- hero.png dosyasını ana dizine koyun -->
-                        <img src="hero.png" alt="Hero Image" onerror="this.src='https://via.placeholder.com/600x600?text=Gamification+Concept'" class="shadow-2xl">
+                        <img src="hero.png" alt="Hero Image" onerror="this.src='https://via.placeholder.com/600x600?text=Gamification+Concept'" class="shadow-2xl dark:opacity-90">
                     </div>
                 </div>
             </div>
@@ -125,28 +152,27 @@
     </section>
 
     <!-- About & Vision -->
-    <section id="about" class="py-24 bg-slate-50">
+    <section id="about" class="py-24 bg-slate-50 dark:bg-zinc-900/50">
         <div class="container-custom">
             <div class="grid-12 mb-20 items-center">
                 <div class="col-5">
                     <div class="image-container">
-                        <!-- hakkimizda.jpg dosyasını ana dizine koyun -->
-                        <img src="hakkimizda.jpg" alt="About" onerror="this.src='https://via.placeholder.com/500x700?text=Hakkımızda'" class="shadow-lg">
+                        <img src="hakkimizda.jpg" alt="About" onerror="this.src='https://via.placeholder.com/500x700?text=Hakkımızda'" class="shadow-lg dark:brightness-90">
                     </div>
                 </div>
                 <div class="col-7">
-                    <div class="pl-10">
-                        <h2 class="text-4xl font-extrabold mb-6 italic">Geleneksel PR'ı Oyunlaştırma ile Değiştiriyoruz.</h2>
-                        <p class="text-gray-600 text-lg mb-8 leading-relaxed">Biz bir köprüyüz. Markaların etkileşim ihtiyaçlarını, oyun dünyasının mekanikleriyle birleştirerek kalıcı kullanıcı sadakati yaratıyoruz. Danışmanlığımız, markanızın oyun içi entegrasyonundan iletişim stratejisine kadar her aşamayı kapsar.</p>
+                    <div class="pl-10 md:pl-10 pl-0">
+                        <h2 class="text-4xl font-extrabold mb-6 italic dark:text-white">Geleneksel PR'ı Oyunlaştırma ile Değiştiriyoruz.</h2>
+                        <p class="text-gray-600 dark:text-zinc-400 text-lg mb-8 leading-relaxed">Biz bir köprüyüz. Markaların etkileşim ihtiyaçlarını, oyun dünyasının mekanikleriyle birleştirerek kalıcı kullanıcı sadakati yaratıyoruz. Danışmanlığımız, markanızın oyun içi entegrasyonundan iletişim stratejisine kadar her aşamayı kapsar.</p>
                         
                         <div class="grid-12">
                             <div class="col-6">
-                                <h4 class="font-bold text-blue-600 mb-2">VİZYONUMUZ</h4>
-                                <p class="text-sm text-gray-500 italic">"Reklamın olmadığı, sadece oyunun ve deneyimin olduğu bir dijital ekosistem yaratmak."</p>
+                                <h4 class="font-bold text-blue-600 dark:text-blue-400 mb-2">VİZYONUMUZ</h4>
+                                <p class="text-sm text-gray-500 dark:text-zinc-500 italic">"Reklamın olmadığı, sadece oyunun ve deneyimin olduğu bir dijital ekosistem yaratmak."</p>
                             </div>
                             <div class="col-6 text-right">
-                                <h4 class="font-bold text-blue-600 mb-2">MİSYONUMUZ</h4>
-                                <p class="text-sm text-gray-500 italic">"Markaları ve oyuncuları en doğal, en eğlenceli ve en karlı noktada buluşturmak."</p>
+                                <h4 class="font-bold text-blue-600 dark:text-blue-400 mb-2">MİSYONUMUZ</h4>
+                                <p class="text-sm text-gray-500 dark:text-zinc-500 italic">"Markaları ve oyuncuları en doğal, en eğlenceli ve en karlı noktada buluşturmak."</p>
                             </div>
                         </div>
                     </div>
@@ -156,49 +182,48 @@
     </section>
 
     <!-- Studio Categories -->
-    <section id="partners" class="py-24">
+    <section id="partners" class="py-24 bg-white dark:bg-zinc-950">
         <div class="container-custom">
             <div class="grid-12 mb-12">
-                <div class="col-12">
-                    <h2 class="text-3xl font-extrabold uppercase border-b-2 border-black inline-block pb-2">Oyun Partneri Kategorileri</h2>
+                <div class="col-12 text-center">
+                    <h2 class="text-3xl font-extrabold uppercase border-b-2 border-black dark:border-white inline-block pb-2 dark:text-white">Oyun Partneri Kategorileri</h2>
                 </div>
             </div>
             <div class="grid-12">
-                <!-- Kategoriler: Resimleri kategori-*.jpg olarak ana dizine atın -->
                 <div class="col-3">
                     <div class="glass-card text-center group">
                         <div class="mb-6 overflow-hidden rounded-md">
-                            <img src="kategori-hypercasual.jpg" alt="HC" onerror="this.src='https://via.placeholder.com/300x200?text=Hypercasual'" class="group-hover:scale-110 transition">
+                            <img src="kategori-hypercasual.jpg" alt="HC" onerror="this.src='https://via.placeholder.com/300x200?text=Hypercasual'" class="group-hover:scale-110 transition brightness-100 dark:brightness-75">
                         </div>
-                        <h5 class="font-bold text-lg mb-2">Hyper-Casual</h5>
-                        <p class="text-xs text-gray-400">Hızlı etkileşim, kitlesel erişim.</p>
+                        <h5 class="font-bold text-lg mb-2 dark:text-zinc-200">Hyper-Casual</h5>
+                        <p class="text-xs text-gray-400 dark:text-zinc-500">Hızlı etkileşim, kitlesel erişim.</p>
                     </div>
                 </div>
                 <div class="col-3">
                     <div class="glass-card text-center group">
                         <div class="mb-6 overflow-hidden rounded-md">
-                            <img src="kategori-midcore.jpg" alt="Mid" onerror="this.src='https://via.placeholder.com/300x200?text=Mid-Core'" class="group-hover:scale-110 transition">
+                            <img src="kategori-midcore.jpg" alt="Mid" onerror="this.src='https://via.placeholder.com/300x200?text=Mid-Core'" class="group-hover:scale-110 transition brightness-100 dark:brightness-75">
                         </div>
-                        <h5 class="font-bold text-lg mb-2">Mid-Core & RPG</h5>
-                        <p class="text-xs text-gray-400">Derin deneyim, sadık kitle.</p>
+                        <h5 class="font-bold text-lg mb-2 dark:text-zinc-200">Mid-Core & RPG</h5>
+                        <p class="text-xs text-gray-400 dark:text-zinc-500">Derin deneyim, sadık kitle.</p>
                     </div>
                 </div>
                 <div class="col-3">
                     <div class="glass-card text-center group">
                         <div class="mb-6 overflow-hidden rounded-md">
-                            <img src="kategori-puzzle.jpg" alt="Pz" onerror="this.src='https://via.placeholder.com/300x200?text=Puzzle'" class="group-hover:scale-110 transition">
+                            <img src="kategori-puzzle.jpg" alt="Pz" onerror="this.src='https://via.placeholder.com/300x200?text=Puzzle'" class="group-hover:scale-110 transition brightness-100 dark:brightness-75">
                         </div>
-                        <h5 class="font-bold text-lg mb-2">Puzzle / Casual</h5>
-                        <p class="text-xs text-gray-400">Zeka ve zaman odaklı marka entegrasyonu.</p>
+                        <h5 class="font-bold text-lg mb-2 dark:text-zinc-200">Puzzle / Casual</h5>
+                        <p class="text-xs text-gray-400 dark:text-zinc-500">Zeka ve zaman odaklı marka entegrasyonu.</p>
                     </div>
                 </div>
                 <div class="col-3">
                     <div class="glass-card text-center group">
                         <div class="mb-6 overflow-hidden rounded-md">
-                            <img src="kategori-metaverse.jpg" alt="Meta" onerror="this.src='https://via.placeholder.com/300x200?text=Metaverse'" class="group-hover:scale-110 transition">
+                            <img src="kategori-metaverse.jpg" alt="Meta" onerror="this.src='https://via.placeholder.com/300x200?text=Metaverse'" class="group-hover:scale-110 transition brightness-100 dark:brightness-75">
                         </div>
-                        <h5 class="font-bold text-lg mb-2">Metaverse</h5>
-                        <p class="text-xs text-gray-400">Geleceğin dünyasında sanal varlıklar.</p>
+                        <h5 class="font-bold text-lg mb-2 dark:text-zinc-200">Metaverse</h5>
+                        <p class="text-xs text-gray-400 dark:text-zinc-500">Geleceğin dünyasında sanal varlıklar.</p>
                     </div>
                 </div>
             </div>
@@ -206,21 +231,23 @@
     </section>
 
     <!-- References -->
-    <section id="references" class="py-16 border-y border-gray-100 bg-white">
+    <section id="references" class="full-page-section bg-zinc-50 dark:bg-zinc-900 border-y border-gray-100 dark:border-zinc-800">
         <div class="container-custom">
-            <div class="grid-12 opacity-30 items-center justify-between grayscale hover:grayscale-0 hover:opacity-100 transition duration-500">
-                <div class="col-2"><img src="referans1.png" alt="R1" onerror="this.src='https://via.placeholder.com/120x60?text=Marka1'" class="mx-auto h-6 object-contain"></div>
-                <div class="col-2"><img src="referans2.png" alt="R2" onerror="this.src='https://via.placeholder.com/120x60?text=Marka2'" class="mx-auto h-6 object-contain"></div>
-                <div class="col-2"><img src="referans3.png" alt="R3" onerror="this.src='https://via.placeholder.com/120x60?text=Marka3'" class="mx-auto h-6 object-contain"></div>
-                <div class="col-2"><img src="referans4.png" alt="R4" onerror="this.src='https://via.placeholder.com/120x60?text=Marka4'" class="mx-auto h-6 object-contain"></div>
-                <div class="col-2"><img src="referans5.png" alt="R5" onerror="this.src='https://via.placeholder.com/120x60?text=Marka5'" class="mx-auto h-6 object-contain"></div>
-                <div class="col-2"><img src="referans6.png" alt="R6" onerror="this.src='https://via.placeholder.com/120x60?text=Marka6'" class="mx-auto h-6 object-contain"></div>
+            <div class="grid-12">
+                <div class="col-12">
+                    <h2 class="text-sm font-bold text-gray-400 dark:text-zinc-500 uppercase tracking-[0.3em] mb-8">Referanslarımız</h2>
+                    <div class="py-20 px-10 border-2 border-dashed border-gray-200 dark:border-zinc-800 rounded-3xl inline-block bg-white dark:bg-zinc-950 shadow-sm">
+                        <p class="text-2xl md:text-4xl font-light text-gray-400 dark:text-zinc-600 italic">
+                            Referans kısımları en yakın zamanda düzenlenecektir.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Contact -->
-    <section id="contact" class="py-24 bg-black text-white">
+    <section id="contact" class="py-24 bg-black dark:bg-zinc-950 text-white border-t border-zinc-900">
         <div class="container-custom">
             <div class="grid-12">
                 <div class="col-6">
@@ -234,9 +261,9 @@
                 <div class="col-6">
                     <form action="#" class="space-y-4">
                         <div class="grid-12">
-                            <div class="col-12"><input type="text" placeholder="Ad Soyad / Şirket" class="w-full bg-zinc-900 border border-zinc-800 p-4 rounded outline-none focus:border-blue-600 transition"></div>
-                            <div class="col-12 mt-4"><input type="email" placeholder="Kurumsal E-posta" class="w-full bg-zinc-900 border border-zinc-800 p-4 rounded outline-none focus:border-blue-600 transition"></div>
-                            <div class="col-12 mt-4"><textarea placeholder="Beklentileriniz ve Hedef Kitleniz" rows="5" class="w-full bg-zinc-900 border border-zinc-800 p-4 rounded outline-none focus:border-blue-600 transition"></textarea></div>
+                            <div class="col-12"><input type="text" placeholder="Ad Soyad / Şirket" class="w-full bg-zinc-900 border border-zinc-800 p-4 rounded outline-none focus:border-blue-600 transition text-white"></div>
+                            <div class="col-12 mt-4"><input type="email" placeholder="Kurumsal E-posta" class="w-full bg-zinc-900 border border-zinc-800 p-4 rounded outline-none focus:border-blue-600 transition text-white"></div>
+                            <div class="col-12 mt-4"><textarea placeholder="Beklentileriniz ve Hedef Kitleniz" rows="5" class="w-full bg-zinc-900 border border-zinc-800 p-4 rounded outline-none focus:border-blue-600 transition text-white"></textarea></div>
                             <div class="col-12 mt-6">
                                 <button type="submit" class="w-full btn-primary bg-blue-600 text-white border-none py-5 rounded-md hover:bg-blue-700">TALEBİ GÖNDER</button>
                             </div>
@@ -248,14 +275,45 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-10 bg-black border-t border-zinc-900">
+    <footer class="py-10 bg-black dark:bg-zinc-950 border-t border-zinc-900">
         <div class="container-custom">
-            <div class="grid-12 text-zinc-600 text-xs items-center uppercase tracking-widest font-bold">
+            <div class="grid-12 text-zinc-600 dark:text-zinc-500 text-xs items-center uppercase tracking-widest font-bold">
                 <div class="col-6">© 2024 GAMIFICATION BRIDGE AGENCY. ALL RIGHTS RESERVED.</div>
                 <div class="col-6 text-right">PR // GAMING // TECHNOLOGY</div>
             </div>
         </div>
     </footer>
+
+    <!-- Dark Mode Toggle Script -->
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+        // Check preference on load
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            themeToggleLightIcon.classList.remove('hidden');
+        } else {
+            document.documentElement.classList.remove('dark');
+            themeToggleDarkIcon.classList.remove('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', function() {
+            // Toggle icons
+            themeToggleDarkIcon.classList.toggle('hidden');
+            themeToggleLightIcon.classList.toggle('hidden');
+
+            // Toggle theme
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        });
+    </script>
 
 </body>
 </html>
